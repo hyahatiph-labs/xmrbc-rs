@@ -1,4 +1,4 @@
-use btcbc::{Network, Request, Transaction};
+use xmrbc::{Network, Request, Transaction};
 use futures::SinkExt;
 use nym_addressing::clients::Recipient;
 use structopt::StructOpt;
@@ -13,14 +13,14 @@ struct Options {
         short,
         long,
         parse(try_from_str = Recipient::try_from_base58_string),
-        default_value = "7GAmWTUr3wude4LkRBJ78UmD2QMCgQvr8RCRJHW1fUYf.DHhHL8ZcnEEFq3UKuD7E31aWdnzuWdeJv1wRicj9n6tU@AmoRv85ak8UrYkqd43NZpQJFQjn8rtgMfViBgAFaPDRh"
+        default_value = "update this..."
     )]
     service_provider: Recipient,
     #[structopt(
         short,
         long,
-        default_value = "bitcoin",
-        help = "one of 'bitcoin', 'testnet' or 'liquid'"
+        default_value = "monero",
+        help = "one of 'monero' or 'stagenet'"
     )]
     network: Network,
     transaction: Transaction,

@@ -1,7 +1,7 @@
 [package]
-name = "btcbc"
+name = "xmrbc"
 version = "0.1.0"
-authors = ["Sebastian Geisler <github@gnet.me>"]
+authors = ["@reemuru <rimuru@hiahatf.org>"]
 edition = "2018"
 license = "MIT"
 

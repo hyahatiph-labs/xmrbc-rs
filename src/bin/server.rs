@@ -1,6 +1,6 @@
 #![feature(async_closure)]
 
-use btcbc::{Network, Request, Transaction};
+use xmrbc::{Network, Request, Transaction};
 use futures::sink::SinkExt;
 use futures::stream::StreamExt;
 use nym_websocket::responses::ServerResponse;
@@ -16,13 +16,19 @@ struct Options {
     websocket: String,
 }
 
+struct Metadata {
+    metadata: String
+}
+
 async fn submit_tx(net: Network, tx: Transaction) {
     debug!("Submitting transaction to network {:?}: {}", net, tx);
 
+    let mut req = std::collections::HashMap::new();
+    req.insert("metadata", tx.to_string());
     let client = reqwest::Client::new();
     match client
         .post(net.api_endpoint())
-        .body(tx.to_string())
+        .json(&req)
         .send()
         .await
     {

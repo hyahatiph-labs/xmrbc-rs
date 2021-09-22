@@ -5,9 +5,8 @@ use std::str::FromStr;
 
 #[derive(Debug, Ord, PartialOrd, Eq, PartialEq, Serialize, Deserialize)]
 pub enum Network {
-    Bitcoin,
-    Testnet,
-    Liquid,
+    Monero,
+    Stagenet
 }
 
 #[derive(Debug, Ord, PartialOrd, Eq, PartialEq, Serialize, Deserialize)]
@@ -22,9 +21,8 @@ pub struct Transaction(pub Vec<u8>);
 impl Network {
     pub fn api_endpoint(&self) -> &str {
         match self {
-            Network::Bitcoin => "https://blockstream.info/api/tx",
-            Network::Testnet => "https://blockstream.info/testnet/api/tx",
-            Network::Liquid => "https://blockstream.info/liquid/api/tx",
+            Network::Monero => "https://hiahatf.org/xmr/relay",
+            Network::Stagenet => "https://hiahatf.org/xmr/stagenet/relay"
         }
     }
 }
@@ -45,9 +43,8 @@ impl FromStr for Network {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
-            "bitcoin" => Ok(Network::Bitcoin),
-            "testnet" => Ok(Network::Testnet),
-            "liquid" => Ok(Network::Liquid),
+            "monero" => Ok(Network::Monero),
+            "stagenet" => Ok(Network::Stagenet),
             // Annoying that we need to clone here, but `FromStr::Err` doesn't allow lifetimes
             other => Err(UnknownNetworkError(other.to_string())),
         }
