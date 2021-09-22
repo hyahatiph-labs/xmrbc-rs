@@ -1,13 +1,13 @@
 # Nym Monero Broadcaster
-This repository implement an anonymous Monero transaction broadcasting tool on top of
+This repository implement an anonymous Monero metadata broadcasting tool on top of
 [Nym](https://github.com/nymtech/nym), a mixnet still under heavy development. So while the technology looks promising
 any anonymity claims are to be taken with a grain of salt. This project is provided as-is, it might work as expected or
-not, please don't rely on it without vetting it yourself.
+not, please don't rely on it without vetting it yourself. 
 
 There are two parts:
-* **Client:** connects to a nym native-client and sends a transaction to a specified server (aka service provider)
+* **Client:** connects to a nym native-client and sends metadata to a specified server (aka service provider)
 * **Server:** listens for incoming nym packets from its nym native-client. If they are valid client requests containing
-a transaction it is broadcasted to its respective network using [xmrchain.net](https://xmrchain.net).
+metadata, it is broadcasted to its respective network using [Hyahatiph Labs](https://hiahatf.org) xmr relay.
 
 ## Usage
 ### Nym Native Client
@@ -33,7 +33,7 @@ nym-client run --id server
 xmrbc 0.1.0
 
 USAGE:
-    client [OPTIONS] <transaction>
+    client [OPTIONS] <metadata>
 
 FLAGS:
     -h, --help       Prints help information
@@ -46,14 +46,14 @@ OPTIONS:
     -w, --websocket <websocket>                   [default: ws://127.0.0.1:1977]
 
 ARGS:
-    <transaction>    
+    <metadata>    
 ```
 
 If you cloned this repo, have [Rust installed](https://rustup.rs/) and initialized your nym client as shown above you
-can run the following to transmit Monero tx metadata `<transaction>` through a service provider at `<address>`:
+can run the following to transmit Monero tx metadata `<metadata>` through a service provider at `<address>`:
 
 ```
-cargo run --bin client -- -s <address> <transaction>
+cargo run --bin client -- -s <address> <metadata>
 ```
 
 There is a default service provider at `TBD`
@@ -63,7 +63,7 @@ If you want to transmit it to another `<network>` (supported networks: monero, s
 flag:
 
 ```
-cargo run --bin client -- --network <network> -s <address> <transaction>
+cargo run --bin client -- --network <network> -s <address> <metadata>
 ```
 
 ### XMR-BC Server
@@ -94,7 +94,7 @@ It will output a log message telling you its nym address:
 Feb 13 15:07:20.291  INFO server: Listening on TBD
 ```
 
-This address has to be given as an argument to the client when sending transactions.
+This address has to be given as an argument to the client when sending metadata.
 
 ## Debugging
 If something isn't working as expected you can use the `RUST_LOG` environment variable to enable more verbose logging
