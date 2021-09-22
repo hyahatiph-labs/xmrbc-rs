@@ -56,7 +56,7 @@ can run the following to transmit Monero tx metadata `<metadata>` through a serv
 cargo run --bin client -- -s <address> <metadata>
 ```
 
-There is a default service provider at `TBD`
+There is a default service provider at <b>`TODO: Update default service provider`</b>
 which I run on a best-effort basis and which is chosen if the `-s` flag isn't provided. Please don't rely on it for anything critical.
 
 If you want to transmit it to another `<network>` (supported networks: monero, stagenet), just specify the network
@@ -91,7 +91,7 @@ cargo run --bin server -- --websocket ws://127.0.0.1:1978
 It will output a log message telling you its nym address:
 
 ```
-Feb 13 15:07:20.291  INFO server: Listening on TBD
+Feb 13 15:07:20.291  INFO server: Listening on <TODO: Update default service provider>
 ```
 
 This address has to be given as an argument to the client when sending metadata.

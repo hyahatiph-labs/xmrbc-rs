@@ -16,10 +16,6 @@ struct Options {
     websocket: String,
 }
 
-struct Metadata {
-    metadata: String
-}
-
 async fn submit_tx(net: Network, tx: Transaction) {
     debug!("Submitting transaction to network {:?}: {}", net, tx);
 

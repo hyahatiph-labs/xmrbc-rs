@@ -13,7 +13,7 @@ struct Options {
         short,
         long,
         parse(try_from_str = Recipient::try_from_base58_string),
-        default_value = "update this..."
+        default_value = "" // TODO: update default server
     )]
     service_provider: Recipient,
     #[structopt(
