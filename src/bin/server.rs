@@ -1,6 +1,5 @@
-#![feature(async_closure)]
 
-use xmrbc::{Network, Request, Transaction};
+use xmrbc::{Network, Request, Metadata};
 use futures::sink::SinkExt;
 use futures::stream::StreamExt;
 use nym_websocket::responses::ServerResponse;
@@ -16,7 +15,7 @@ struct Options {
     websocket: String,
 }
 
-async fn submit_tx(net: Network, tx: Transaction) {
+async fn submit_tx(net: Network, tx: Metadata) {
     debug!("Submitting transaction to network {:?}: {}", net, tx);
 
     let mut req = std::collections::HashMap::new();
@@ -97,6 +96,6 @@ async fn main() {
             }
         };
 
-        tokio::spawn(submit_tx(request.network, request.transaction));
+        tokio::spawn(submit_tx(request.network, request.metadata));
     }
 }
