@@ -12,11 +12,11 @@ pub enum Network {
 #[derive(Debug, Ord, PartialOrd, Eq, PartialEq, Serialize, Deserialize)]
 pub struct Request {
     pub network: Network,
-    pub transaction: Transaction,
+    pub metadata: Metadata,
 }
 
 #[derive(Debug, Ord, PartialOrd, Eq, PartialEq, Serialize, Deserialize)]
-pub struct Transaction(pub Vec<u8>);
+pub struct Metadata(pub Vec<u8>);
 
 impl Network {
     pub fn api_endpoint(&self) -> &str {
@@ -51,15 +51,15 @@ impl FromStr for Network {
     }
 }
 
-impl FromStr for Transaction {
+impl FromStr for Metadata {
     type Err = hex::FromHexError;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        Ok(Transaction(hex::decode(s)?))
+        Ok(Metadata(hex::decode(s)?))
     }
 }
 
-impl Display for Transaction {
+impl Display for Metadata {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         // Why no `encode_to_fmt`???
         f.write_str(&hex::encode(&self.0))

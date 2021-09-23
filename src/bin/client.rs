@@ -1,4 +1,4 @@
-use xmrbc::{Network, Request, Transaction};
+use xmrbc::{Network, Request, Metadata};
 use futures::SinkExt;
 use nym_addressing::clients::Recipient;
 use structopt::StructOpt;
@@ -13,7 +13,7 @@ struct Options {
         short,
         long,
         parse(try_from_str = Recipient::try_from_base58_string),
-        default_value = "" // TODO: update default server
+        default_value = "5NkuNyAUkeMZQRxbb77FxXHCTUti1tgFdRSYkXxvycP4.G9J5L4CkJS7qoirQvfxVDGvRSjn3ANjHhMopK5i3CH4E@6LdVTJhRfJKsrUtnjFqE3TpEbCYs3VZoxmaoNFqRWn4x"
     )]
     service_provider: Recipient,
     #[structopt(
@@ -23,14 +23,14 @@ struct Options {
         help = "one of 'monero' or 'stagenet'"
     )]
     network: Network,
-    transaction: Transaction,
+    metadata: Metadata,
 }
 
 impl Options {
     fn into_parts(self) -> (String, Request, Recipient) {
         let req = Request {
             network: self.network,
-            transaction: self.transaction,
+            metadata: self.metadata,
         };
         (self.websocket, req, self.service_provider)
     }
