@@ -1,5 +1,5 @@
 # Nym Monero Broadcaster
-This repository implement an anonymous Monero metadata broadcasting tool on top of
+This repository implements an anonymous Monero metadata broadcasting tool on top of
 [Nym](https://github.com/nymtech/nym), a mixnet still under heavy development. So while the technology looks promising
 any anonymity claims are to be taken with a grain of salt. This project is provided as-is, it might work as expected or
 not, please don't rely on it without vetting it yourself. 
