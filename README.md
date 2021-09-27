@@ -7,9 +7,7 @@ not, please don't rely on it without vetting it yourself.
 There are two parts:
 * **Client:** connects to a nym native-client and sends metadata to a specified server (aka service provider)
 * **Server:** listens for incoming nym packets from its nym native-client. If they are valid client requests containing
-metadata, it is broadcasted to its respective network using [Hyahatiph Labs](https://hiahatf.org/xmr-relay/) (clearnet REST API)
-nysitbgl25hwv2uh32lbjah4semzcmyuqoqphohtbecrglwpcukq.b32.i2p (stagenet experimental cgi script, mainnet TBD) xmr relay. For
-I2P add the b32 address above to your address book. Instructions will be at the hostname you set/xmr-relay.
+metadata, it is broadcasted to its respective network using [Hyahatiph Labs](https://hiahatf.org/xmr-relay/) xmr relay API.
 
 ## Usage
 ### Nym Native Client
