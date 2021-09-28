@@ -7,7 +7,7 @@ not, please don't rely on it without vetting it yourself.
 There are two parts:
 * **Client:** connects to a nym native-client and sends transaction to a specified server (aka service provider)
 * **Server:** listens for incoming nym packets from its nym native-client. If they are valid client requests containing a valid transaction, 
-it is broadcasted to its respective network using [Hyahatiph Labs I2P Monero Block Explorer](http://http://xmr3wzqt4r4ypgrljbt7xpjemswbefkfmo6xu4s7j34dscf5ji3q.b32.i2p/). To use this project explorer [i2p](https://geti2p.net/en/download) and run `i2prouter start`. Set the http_proxy environment variable with `export http_proxy=http://localhost:4444`. Or enter your own block explorer url with the network flag.
+it is broadcasted to its respective network using [Hyahatiph Labs I2P Monero Block Explorer](http://http://xmr3wzqt4r4ypgrljbt7xpjemswbefkfmo6xu4s7j34dscf5ji3q.b32.i2p/). To use this explorer install [i2p](https://geti2p.net/en/download) and run `i2prouter start`. Set the http_proxy environment variable with `export http_proxy=http://localhost:4444`, or enter your own block explorer url with the network flag.
 
 ## Usage
 ### Monero tx blob
