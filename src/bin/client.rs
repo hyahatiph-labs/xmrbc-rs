@@ -1,4 +1,4 @@
-use xmrbc::{Network, Request, Transaction};
+use xmrbc::{Request, Transaction};
 use futures::SinkExt;
 use nym_addressing::clients::Recipient;
 use structopt::StructOpt;
@@ -19,10 +19,10 @@ struct Options {
     #[structopt(
         short,
         long,
-        default_value = "monero",
-        help = "one of 'monero' or 'stagenet'"
+        default_value = "http://xmr3wzqt4r4ypgrljbt7xpjemswbefkfmo6xu4s7j34dscf5ji3q.b32.i2p/checkandpush",
+        help = "enter block explorer url"
     )]
-    network: Network,
+    network: String,
     transaction: Transaction,
 }
 

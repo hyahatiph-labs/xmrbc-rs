@@ -1,5 +1,5 @@
 
-use xmrbc::{Network, Request, Transaction};
+use xmrbc::{Request, Transaction};
 use futures::sink::SinkExt;
 use futures::stream::StreamExt;
 use nym_websocket::responses::ServerResponse;
@@ -15,14 +15,14 @@ struct Options {
     websocket: String,
 }
 
-async fn submit_tx(net: Network, tx: Transaction) {
+async fn submit_tx(net: String, tx: Transaction) {
     debug!("Submitting transaction to network {:?}: {}", net, tx);
 
     let request = format!("rawtxdata={}&action=push", tx.to_string());
 
     let client = reqwest::Client::new();
     match client
-        .post(net.api_endpoint())
+        .post(&net)
         .body(request)
         .send()
         .await

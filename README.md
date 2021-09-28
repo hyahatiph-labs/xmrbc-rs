@@ -7,7 +7,7 @@ not, please don't rely on it without vetting it yourself.
 There are two parts:
 * **Client:** connects to a nym native-client and sends transaction to a specified server (aka service provider)
 * **Server:** listens for incoming nym packets from its nym native-client. If they are valid client requests containing a valid transaction, 
-it is broadcasted to its respective network using [Hyahatiph Labs I2P Monero Block Explorer](http://http://xmr3wzqt4r4ypgrljbt7xpjemswbefkfmo6xu4s7j34dscf5ji3q.b32.i2p/). To use this project install [i2p](https://geti2p.net/en/download) and run `i2prouter start`. Set the http_proxy environment variable with `export http_proxy=http://localhost:4444`.
+it is broadcasted to its respective network using [Hyahatiph Labs I2P Monero Block Explorer](http://http://xmr3wzqt4r4ypgrljbt7xpjemswbefkfmo6xu4s7j34dscf5ji3q.b32.i2p/). To use this project explorer [i2p](https://geti2p.net/en/download) and run `i2prouter start`. Set the http_proxy environment variable with `export http_proxy=http://localhost:4444`. Or enter your own block explorer url with the network flag.
 
 ## Usage
 ### Monero tx blob
@@ -47,13 +47,16 @@ FLAGS:
     -V, --version    Prints version information
 
 OPTIONS:
-    -n, --network <network>                      one of 'monero' or 'stagenet' [default: monero]
+    -n, --network <network>
+            enter block explorer url [default:
+            http://xmr3wzqt4r4ypgrljbt7xpjemswbefkfmo6xu4s7j34dscf5ji3q.b32.i2p/checkandpush]
     -s, --service-provider <service-provider>
-             [default: TBD ]
+             [default:
+            5NkuNyAUkeMZQRxbb77FxXHCTUti1tgFdRSYkXxvycP4.G9J5L4CkJS7qoirQvfxVDGvRSjn3ANjHhMopK5i3CH4E@6LdVTJhRfJKsrUtnjFqE3TpEbCYs3VZoxmaoNFqRWn4x]
     -w, --websocket <websocket>                   [default: ws://127.0.0.1:1977]
 
 ARGS:
-    <transaction>    
+    <transaction>   
 ```
 
 If you cloned this repo, have [Rust installed](https://rustup.rs/) and initialized your nym client as shown above you
@@ -67,8 +70,8 @@ There is a default service provider at `5NkuNyAUkeMZQRxbb77FxXHCTUti1tgFdRSYkXxv
 `
 which I run on a best-effort basis and which is chosen if the `-s` flag isn't provided. Please don't rely on it for anything critical.
 
-If you want to transmit it to another `<network>` (supported networks: monero, stagenet), just specify the network
-flag:
+If you want to transmit it to another `<network>` just specify the network
+flag with the block explorer url:
 
 ```
 cargo run --bin client -- --network <network> -s <address> <transaction>
