@@ -108,6 +108,8 @@ This address has to be given as an argument to the client when sending transacti
 If something isn't working as expected you can use the `RUST_LOG` environment variable to enable more verbose logging
 (e.g. `RUST_LOG=debug`).
 
+Sample success [log](./success-log.md)
+
 ## Shoutouts
 * This was inspired by @sgeisler 's work on [btcbc-rs](https://github.com/sgeisler/btcbc-rs)
 * Thanks to @t-900-a for suggesting
