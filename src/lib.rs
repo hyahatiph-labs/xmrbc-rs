@@ -12,17 +12,17 @@ pub enum Network {
 #[derive(Debug, Ord, PartialOrd, Eq, PartialEq, Serialize, Deserialize)]
 pub struct Request {
     pub network: Network,
-    pub metadata: Metadata,
+    pub transaction: Transaction,
 }
 
 #[derive(Debug, Ord, PartialOrd, Eq, PartialEq, Serialize, Deserialize)]
-pub struct Metadata(pub Vec<u8>);
+pub struct Transaction(pub Vec<u8>);
 
 impl Network {
     pub fn api_endpoint(&self) -> &str {
         match self {
-            Network::Monero => "https://xmrchain.net/checkandpush",
-            Network::Stagenet => "https://stagenet.xmrchain.net/checkandpush"
+            Network::Monero => "http://xmr3wzqt4r4ypgrljbt7xpjemswbefkfmo6xu4s7j34dscf5ji3q.b32.i2p/checkandpush",
+            Network::Stagenet => "http://xmr326jan2ysnf4bwuut5apbajtab4kgbv5r5cwduio2xos7abrq.b32.i2p/checkandpush"
         }
     }
 }
@@ -51,15 +51,15 @@ impl FromStr for Network {
     }
 }
 
-impl FromStr for Metadata {
+impl FromStr for Transaction {
     type Err = hex::FromHexError;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        Ok(Metadata(hex::decode(s)?))
+        Ok(Transaction(hex::decode(s)?))
     }
 }
 
-impl Display for Metadata {
+impl Display for Transaction {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         // Why no `encode_to_fmt`???
         f.write_str(&hex::encode(&self.0))

@@ -1,5 +1,5 @@
 # Nym Monero Broadcaster
-This repository implements an anonymous Monero metadata broadcasting tool on top of
+This repository implements an anonymous Monero transaction broadcasting tool on top of
 [Nym](https://github.com/nymtech/nym), a mixnet still under heavy development. So while the technology looks promising
 any anonymity claims are to be taken with a grain of salt. This project is provided as-is, it might work as expected or
 not, please don't rely on it without vetting it yourself. 
@@ -7,9 +7,16 @@ not, please don't rely on it without vetting it yourself.
 There are two parts:
 * **Client:** connects to a nym native-client and sends transaction to a specified server (aka service provider)
 * **Server:** listens for incoming nym packets from its nym native-client. If they are valid client requests containing a valid transaction, 
-it is broadcasted to its respective network using [XMRChain Block Explorer](https://xmrchain.net/rawtx) xmr relay.
+it is broadcasted to its respective network using [Hyahatiph Labs I2P Monero Block Explorer](http://http://xmr3wzqt4r4ypgrljbt7xpjemswbefkfmo6xu4s7j34dscf5ji3q.b32.i2p/) xmr relay. To use this project install [i2p](https://geti2p.net/en/download) and run `i2prouter start`. Set the http_proxy environment variable with `export http_proxy=http://localhost:4444`.
 
 ## Usage
+### Monero tx blob
+Sample RPC call to get `tx_blob`
+
+```bash
+curl http://127.0.0.1:18083/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"transfer","params":{"destinations":[{"amount":1000000000,"address":"4abc..."}],"account_index":0,"subaddr_indices":[0],"priority":3,"ring_size":11, "do_not_relay": true, "get_tx_hex": true}}' -H 'Content-Type: application/json'
+```
+
 ### Nym Native Client
 To use either one you have to initialize and run a [Nym client](https://nymtech.net/docs/build-peapps/native-client/):
 
@@ -33,7 +40,7 @@ nym-client run --id server
 xmrbc 0.1.0
 
 USAGE:
-    client [OPTIONS] <metadata>
+    client [OPTIONS] <transaction>
 
 FLAGS:
     -h, --help       Prints help information
@@ -46,14 +53,14 @@ OPTIONS:
     -w, --websocket <websocket>                   [default: ws://127.0.0.1:1977]
 
 ARGS:
-    <metadata>    
+    <transaction>    
 ```
 
 If you cloned this repo, have [Rust installed](https://rustup.rs/) and initialized your nym client as shown above you
-can run the following to transmit Monero tx metadata `<metadata>` through a service provider at `<address>`:
+can run the following to transmit Monero tx transaction `<transaction>` through a service provider at `<address>`:
 
 ```
-cargo run --bin client -- -s <address> <metadata>
+cargo run --bin client -- -s <address> <transaction>
 ```
 
 There is a default service provider at `5NkuNyAUkeMZQRxbb77FxXHCTUti1tgFdRSYkXxvycP4.G9J5L4CkJS7qoirQvfxVDGvRSjn3ANjHhMopK5i3CH4E@6LdVTJhRfJKsrUtnjFqE3TpEbCYs3VZoxmaoNFqRWn4x
@@ -64,7 +71,7 @@ If you want to transmit it to another `<network>` (supported networks: monero, s
 flag:
 
 ```
-cargo run --bin client -- --network <network> -s <address> <metadata>
+cargo run --bin client -- --network <network> -s <address> <transaction>
 ```
 
 ### XMR-BC Server
@@ -95,7 +102,7 @@ It will output a log message telling you its nym address:
 Feb 13 15:07:20.291  INFO server: Listening on 5NkuNyAUkeMZQRxbb77FxXHCTUti1tgFdRSYkXxvycP4.G9J5L4CkJS7qoirQvfxVDGvRSjn3ANjHhMopK5i3CH4E@6LdVTJhRfJKsrUtnjFqE3TpEbCYs3VZoxmaoNFqRWn4x
 ```
 
-This address has to be given as an argument to the client when sending metadata.
+This address has to be given as an argument to the client when sending transaction.
 
 ## Debugging
 If something isn't working as expected you can use the `RUST_LOG` environment variable to enable more verbose logging

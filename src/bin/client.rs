@@ -1,4 +1,4 @@
-use xmrbc::{Network, Request, Metadata};
+use xmrbc::{Network, Request, Transaction};
 use futures::SinkExt;
 use nym_addressing::clients::Recipient;
 use structopt::StructOpt;
@@ -23,14 +23,14 @@ struct Options {
         help = "one of 'monero' or 'stagenet'"
     )]
     network: Network,
-    metadata: Metadata,
+    transaction: Transaction,
 }
 
 impl Options {
     fn into_parts(self) -> (String, Request, Recipient) {
         let req = Request {
             network: self.network,
-            metadata: self.metadata,
+            transaction: self.transaction,
         };
         (self.websocket, req, self.service_provider)
     }

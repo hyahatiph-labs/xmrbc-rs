@@ -1,5 +1,5 @@
 
-use xmrbc::{Network, Request, Metadata};
+use xmrbc::{Network, Request, Transaction};
 use futures::sink::SinkExt;
 use futures::stream::StreamExt;
 use nym_websocket::responses::ServerResponse;
@@ -15,10 +15,11 @@ struct Options {
     websocket: String,
 }
 
-async fn submit_tx(net: Network, m: Metadata) {
-    debug!("Submitting metadata to network {:?}: {}", net, m);
+async fn submit_tx(net: Network, tx: Transaction) {
+    debug!("Submitting transaction to network {:?}: {}", net, tx);
 
-    let request = format!("rawtxdata={}&action=push", m.to_string());
+    let request = format!("rawtxdata={}&action=push", tx.to_string());
+
     let client = reqwest::Client::new();
     match client
         .post(net.api_endpoint())
@@ -95,6 +96,6 @@ async fn main() {
             }
         };
 
-        tokio::spawn(submit_tx(request.network, request.metadata));
+        tokio::spawn(submit_tx(request.network, request.transaction));
     }
 }
