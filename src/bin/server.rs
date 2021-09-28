@@ -15,15 +15,14 @@ struct Options {
     websocket: String,
 }
 
-async fn submit_tx(net: Network, tx: Metadata) {
-    debug!("Submitting transaction to network {:?}: {}", net, tx);
+async fn submit_tx(net: Network, m: Metadata) {
+    debug!("Submitting metadata to network {:?}: {}", net, m);
 
-    let mut req = std::collections::HashMap::new();
-    req.insert("metadata", tx.to_string());
+    let request = format!("rawtxdata={}&action=push", m.to_string());
     let client = reqwest::Client::new();
     match client
         .post(net.api_endpoint())
-        .json(&req)
+        .body(request)
         .send()
         .await
     {

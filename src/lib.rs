@@ -21,8 +21,8 @@ pub struct Metadata(pub Vec<u8>);
 impl Network {
     pub fn api_endpoint(&self) -> &str {
         match self {
-            Network::Monero => "https://hiahatf.org/xmr/relay",
-            Network::Stagenet => "https://hiahatf.org/xmr/stagenet/relay"
+            Network::Monero => "https://xmrchain.net/checkandpush",
+            Network::Stagenet => "https://stagenet.xmrchain.net/checkandpush"
         }
     }
 }

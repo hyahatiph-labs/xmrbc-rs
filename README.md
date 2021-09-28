@@ -5,9 +5,9 @@ any anonymity claims are to be taken with a grain of salt. This project is provi
 not, please don't rely on it without vetting it yourself. 
 
 There are two parts:
-* **Client:** connects to a nym native-client and sends metadata to a specified server (aka service provider)
-* **Server:** listens for incoming nym packets from its nym native-client. If they are valid client requests containing
-metadata, it is broadcasted to its respective network using [Hyahatiph Labs](https://hiahatf.org/xmr-relay/) xmr relay.
+* **Client:** connects to a nym native-client and sends transaction to a specified server (aka service provider)
+* **Server:** listens for incoming nym packets from its nym native-client. If they are valid client requests containing a valid transaction, 
+it is broadcasted to its respective network using [XMRChain Block Explorer](https://xmrchain.net/rawtx) xmr relay.
 
 ## Usage
 ### Nym Native Client
