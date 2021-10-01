@@ -1,8 +1,0 @@
-### hiahatf.org stagenet relay
-
-POST https://hiahatf.org/xmr/stagenet/relay
-Content-Type: application/json
-
-{
-"metadata": ""
-}
