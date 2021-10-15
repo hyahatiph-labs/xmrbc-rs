@@ -7,7 +7,7 @@ not, please don't rely on it without vetting it yourself.
 There are two parts:
 * **Client:** connects to a nym native-client and sends transaction to a specified server (aka service provider)
 * **Server:** listens for incoming nym packets from its nym native-client. If they are valid client requests containing a valid transaction, 
-it is broadcasted to its respective network using [Hyahatiph Labs I2P Monero Block Explorer](http://http://xmr3wzqt4r4ypgrljbt7xpjemswbefkfmo6xu4s7j34dscf5ji3q.b32.i2p/). To use this explorer install [i2p](https://geti2p.net/en/download) and run `i2prouter start`. Set the http_proxy environment variable with `export http_proxy=http://localhost:4444`, or enter your own block explorer url with the network flag.
+it is broadcasted to its respective network using [Hyahatiph Labs I2P Monero Block Explorer](http://cvryvrat7qfg2zqbbxthmeemw3j27emfk2n5yuuchfreepbmuybq.b32.i2p). To use this explorer install [i2p](https://geti2p.net/en/download) and run `i2prouter start`. Set the `http_proxy` environment variable with `export http_proxy=http://localhost:4444`, or enter your own block explorer url with the network flag if not using i2p.
 
 ## Usage
 ### Monero tx blob
@@ -49,7 +49,7 @@ FLAGS:
 OPTIONS:
     -n, --network <network>
             enter block explorer url [default:
-            http://xmr3wzqt4r4ypgrljbt7xpjemswbefkfmo6xu4s7j34dscf5ji3q.b32.i2p/checkandpush]
+            http://cvryvrat7qfg2zqbbxthmeemw3j27emfk2n5yuuchfreepbmuybq.b32.i2p/checkandpush]
     -s, --service-provider <service-provider>
              [default:
             5NkuNyAUkeMZQRxbb77FxXHCTUti1tgFdRSYkXxvycP4.G9J5L4CkJS7qoirQvfxVDGvRSjn3ANjHhMopK5i3CH4E@6LdVTJhRfJKsrUtnjFqE3TpEbCYs3VZoxmaoNFqRWn4x]

@@ -19,7 +19,7 @@ struct Options {
     #[structopt(
         short,
         long,
-        default_value = "http://xmr3wzqt4r4ypgrljbt7xpjemswbefkfmo6xu4s7j34dscf5ji3q.b32.i2p/checkandpush",
+        default_value = "http://cvryvrat7qfg2zqbbxthmeemw3j27emfk2n5yuuchfreepbmuybq.b32.i2p/checkandpush",
         help = "enter block explorer url"
     )]
     network: String,
