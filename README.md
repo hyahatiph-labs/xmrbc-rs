@@ -18,7 +18,7 @@ curl http://127.0.0.1:18083/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"tra
 ```
 
 ### Nym Native Client
-To use either one you have to initialize and run a [Nym client](https://nymtech.net/docs/build-peapps/native-client/):
+To use either one you have to initialize and run a [Nym client](https://nymtech.net/docs/stable/developers/develop-with-nym/websocket-client):
 
 ```bash
 nym-client init --id client
