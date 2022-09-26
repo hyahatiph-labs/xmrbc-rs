@@ -14,7 +14,7 @@ it is broadcasted to its respective network using [Hyahatiph Labs I2P Monero Blo
 Sample RPC call to get `tx_blob`
 
 ```bash
-curl http://127.0.0.1:18083/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"transfer","params":{"destinations":[{"amount":1000000000,"address":"4abc..."}],"account_index":0,"subaddr_indices":[0],"priority":3,"ring_size":11, "do_not_relay": true, "get_tx_hex": true}}' -H 'Content-Type: application/json'
+curl http://127.0.0.1:18083/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"transfer","params":{"destinations":[{"amount":1000000000,"address":"4abc..."}],"account_index":0,"subaddr_indices":[0],"priority":3,"ring_size":16, "do_not_relay": true, "get_tx_hex": true}}' -H 'Content-Type: application/json'
 ```
 
 ### Nym Native Client
