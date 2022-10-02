@@ -13,13 +13,13 @@ struct Options {
         short,
         long,
         parse(try_from_str = Recipient::try_from_base58_string),
-        default_value = "5NkuNyAUkeMZQRxbb77FxXHCTUti1tgFdRSYkXxvycP4.G9J5L4CkJS7qoirQvfxVDGvRSjn3ANjHhMopK5i3CH4E@6LdVTJhRfJKsrUtnjFqE3TpEbCYs3VZoxmaoNFqRWn4x"
+        default_value = "7DmUkap6s3CK2kJnYsCe7kZu2QzjnB1MA3tiRKD6gcPx.3e2EuyuMFPLVQvAZ9nM75epUegZjvh2wz2HNnjVJBLLR@678qVUJ21uwxZBhp3r56z7GRf6gMh3NYDHruTegPtgMf"
     )]
     service_provider: Recipient,
     #[structopt(
         short,
         long,
-        default_value = "http://cvryvrat7qfg2zqbbxthmeemw3j27emfk2n5yuuchfreepbmuybq.b32.i2p/checkandpush",
+        default_value = "https://xmrchain.net/checkandpush",
         help = "enter block explorer url"
     )]
     network: String,

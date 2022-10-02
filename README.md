@@ -7,7 +7,7 @@ not, please don't rely on it without vetting it yourself.
 There are two parts:
 * **Client:** connects to a nym native-client and sends transaction to a specified server (aka service provider)
 * **Server:** listens for incoming nym packets from its nym native-client. If they are valid client requests containing a valid transaction, 
-it is broadcasted to its respective network using [Hyahatiph Labs I2P Monero Block Explorer](http://cvryvrat7qfg2zqbbxthmeemw3j27emfk2n5yuuchfreepbmuybq.b32.i2p). To use this explorer install [i2p](https://geti2p.net/en/download) and run `i2prouter start`. Set the `http_proxy` environment variable with `export http_proxy=http://localhost:4444`, or enter your own block explorer url with the network flag if not using i2p.
+it is broadcasted to its respective network using [xmrchain.net](https://xmrchain.net/) and the [Onion Monero Block Explorer](https://github.com/moneroexamples/onion-monero-blockchain-explorer), or enter your own block explorer url with the `--network` flag.
 
 ## Usage
 ### Monero tx blob
@@ -49,10 +49,9 @@ FLAGS:
 OPTIONS:
     -n, --network <network>
             enter block explorer url [default:
-            http://cvryvrat7qfg2zqbbxthmeemw3j27emfk2n5yuuchfreepbmuybq.b32.i2p/checkandpush]
+            https://xmrchain.net/checkandpush]
     -s, --service-provider <service-provider>
-             [default:
-            5NkuNyAUkeMZQRxbb77FxXHCTUti1tgFdRSYkXxvycP4.G9J5L4CkJS7qoirQvfxVDGvRSjn3ANjHhMopK5i3CH4E@6LdVTJhRfJKsrUtnjFqE3TpEbCYs3VZoxmaoNFqRWn4x]
+             [default: 7DmUkap6s3CK2kJnYsCe7kZu2QzjnB1MA3tiRKD6gcPx.3e2EuyuMFPLVQvAZ9nM75epUegZjvh2wz2HNnjVJBLLR@678qVUJ21uwxZBhp3r56z7GRf6gMh3NYDHruTegPtgMf]
     -w, --websocket <websocket>                   [default: ws://127.0.0.1:1977]
 
 ARGS:
@@ -66,8 +65,8 @@ can run the following to transmit Monero tx transaction `<transaction>` through 
 cargo run --bin client -- -s <address> <transaction>
 ```
 
-There is a default service provider at `5NkuNyAUkeMZQRxbb77FxXHCTUti1tgFdRSYkXxvycP4.G9J5L4CkJS7qoirQvfxVDGvRSjn3ANjHhMopK5i3CH4E@6LdVTJhRfJKsrUtnjFqE3TpEbCYs3VZoxmaoNFqRWn4x
-`
+There is a default service provider at `7DmUkap6s3CK2kJnYsCe7kZu2QzjnB1MA3tiRKD6gcPx.3e2EuyuMFPLVQvAZ9nM75epUegZjvh2wz2HNnjVJBLLR@678qVUJ21uwxZBhp3r56z7GRf6gMh3NYDHruTegPtgMf`
+
 which I run on a best-effort basis and which is chosen if the `-s` flag isn't provided. Please don't rely on it for anything critical.
 
 If you want to transmit it to another `<network>` just specify the network
@@ -101,8 +100,8 @@ cargo run --bin server -- --websocket ws://127.0.0.1:1978
 
 It will output a log message telling you its nym address:
 
-```
-Feb 13 15:07:20.291  INFO server: Listening on 5NkuNyAUkeMZQRxbb77FxXHCTUti1tgFdRSYkXxvycP4.G9J5L4CkJS7qoirQvfxVDGvRSjn3ANjHhMopK5i3CH4E@6LdVTJhRfJKsrUtnjFqE3TpEbCYs3VZoxmaoNFqRWn4x
+```bash
+Feb 13 15:07:20.291  INFO server: Listening on 7DmUkap6s3CK2kJnYsCe7kZu2QzjnB1MA3tiRKD6gcPx.3e2EuyuMFPLVQvAZ9nM75epUegZjvh2wz2HNnjVJBLLR@678qVUJ21uwxZBhp3r56z7GRf6gMh3NYDHruTegPtgMf
 ```
 
 This address has to be given as an argument to the client when sending transaction.
@@ -112,6 +111,17 @@ If something isn't working as expected you can use the `RUST_LOG` environment va
 (e.g. `RUST_LOG=debug`).
 
 Sample success [log](./success-log.md)
+
+## Docker
+
+```bash
+podman build --network host -t xmrbc-rs:v0.1.0 .
+```
+
+```bash
+podman run --rm -P -p 127.0.0.1:<SERVER_PORT>:<SERVER_PORT> --name xmrbc-rs \
+xmrbc-rs:v0.1.0 /bin/bash -c "sh /home/dev/deploy.sh <SERVER_PORT>"
+```
 
 ## Shoutouts
 * This was inspired by @sgeisler 's work on [btcbc-rs](https://github.com/sgeisler/btcbc-rs)
