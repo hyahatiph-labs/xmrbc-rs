@@ -16,7 +16,8 @@ cd /home/dev/ && git clone https://github.com/nymtech/nym.git
 cd nym && git checkout tags/nym-binaries-1.0.2 && cargo build --release
 cp target/release/nym-client /usr/bin/
 nym-client init --id server --port $1
-nym-client run --id server &
+nym-client run --id server && \
 
 # start xmrbc-rs
-cd /home/dev/xmrbc-rs && cargo run --bin server -- --websocket ws://127.0.0.1:$1
+cd /home/dev/xmrbc-rs && export RUST_LOG=debug && cargo run --bin server -- --websocket ws://127.0.0.1:$1 >> xmrbc-rs.log
+tail -f xmrbc-rs.log
