@@ -1,4 +1,5 @@
 # Nym Monero Broadcaster
+
 This repository implements an anonymous Monero transaction broadcasting tool on top of
 [Nym](https://github.com/nymtech/nym), a mixnet still under heavy development. So while the technology looks promising
 any anonymity claims are to be taken with a grain of salt. This project is provided as-is, it might work as expected or
@@ -11,6 +12,7 @@ it is broadcasted to its respective network using [xmrchain.net](https://xmrchai
 
 ## Usage
 ### Monero tx blob
+
 Sample RPC call to get `tx_blob`
 
 ```bash
@@ -18,6 +20,7 @@ curl http://127.0.0.1:18083/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"tra
 ```
 
 ### Nym Native Client
+
 To use either one you have to initialize and run a [Nym client](https://nymtech.net/docs/stable/developers/develop-with-nym/websocket-client):
 
 ```bash
@@ -36,7 +39,8 @@ nym-client run --id server
 ``` 
 
 ### XMR-BC Client
-```
+
+```bash
 xmrbc 0.1.0
 
 USAGE:
@@ -61,7 +65,7 @@ ARGS:
 If you cloned this repo, have [Rust installed](https://rustup.rs/) and initialized your nym client as shown above you
 can run the following to transmit Monero tx transaction `<transaction>` through a service provider at `<address>`:
 
-```
+```bash
 cargo run --bin client -- -s <address> <transaction>
 ```
 
@@ -72,12 +76,13 @@ which I run on a best-effort basis and which is chosen if the `-s` flag isn't pr
 If you want to transmit it to another `<network>` just specify the network
 flag with the block explorer url:
 
-```
+```bash
 cargo run --bin client -- --network <network> -s <address> <transaction>
 ```
 
 ### XMR-BC Server
-```
+
+```bash
 xmrbc 0.1.0
 
 USAGE:
@@ -94,7 +99,7 @@ OPTIONS:
 If you cloned this repo, have [Rust installed](https://rustup.rs/) and initialized your nym client as shown above you
 can run the following to start the server:
 
-```
+```bash
 cargo run --bin server -- --websocket ws://127.0.0.1:1978
 ```
 
@@ -105,6 +110,39 @@ Feb 13 15:07:20.291  INFO server: Listening on 7DmUkap6s3CK2kJnYsCe7kZu2QzjnB1MA
 ```
 
 This address has to be given as an argument to the client when sending transaction.
+
+### XMR-BC rpc
+
+```bash
+xmrbc 0.1.0
+
+USAGE:
+    rpc [OPTIONS]
+
+FLAGS:
+    -h, --help       Prints help information
+    -V, --version    Prints version information
+
+OPTIONS:
+    -n, --network <network>
+            enter block explorer url [default:
+            https://stagenet.xmrchain.net/checkandpush]
+    -s, --service-provider <service-provider>
+             [default: D5ehV2EdXb8LcPZM5kNL1C1D61pcJqzKRKNsg2hrB6ig.3iArACGGkrd5unbmqHBJkAWNqNRd29EA79aFWJZUxGwR@ERFGo6CbzLe51EZUgGJoYg2zsYnVXVVfLyB5CZ8P9vsU]
+    -w, --websocket <websocket>                   [default: ws://127.0.0.1:1977]
+```
+
+If you cloned this repo, have [Rust installed](https://rustup.rs/) and initialized your nym client as shown above you
+can run the following to start the server:
+
+```bash
+cargo run --bin rpc
+```
+
+```bash
+http://127.0.0.1:8000/relay?tx=<TX_BLOB>
+```
+
 
 ## Debugging
 If something isn't working as expected you can use the `RUST_LOG` environment variable to enable more verbose logging
