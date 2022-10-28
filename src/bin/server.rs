@@ -16,6 +16,9 @@ struct Options {
 }
 
 async fn submit_tx(net: String, tx: Transaction) {
+
+    // TODO: dont do this if xmr rpc is available
+    // implement xmr rpc connection
     debug!("Submitting transaction to network {:?}: {}", net, tx);
 
     let request = format!("rawtxdata={}&action=push", tx.to_string());
@@ -98,4 +101,12 @@ async fn main() {
 
         tokio::spawn(submit_tx(request.network, request.transaction));
     }
+
+    // TODO: send messages to the client id of nym???
+
+    // TODO: ui for messages retreival
+
+    // TODO: diesel + migration
+
+    // TODO: ...
 }

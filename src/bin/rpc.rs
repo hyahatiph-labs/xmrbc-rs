@@ -27,17 +27,36 @@ struct Options {
         default_value = "https://stagenet.xmrchain.net/checkandpush",
         help = "enter block explorer url"
     )]
+    address: String,
     network: String,
+    txm: String,
 }
 
 impl Options {
     fn into_parts(self, tx: Transaction) -> (String, Request, Recipient) {
         let req = Request {
+            address: self.address,
             network: self.network,
             transaction: tx,
+            txm: self.txm,
         };
         (self.websocket, req, self.service_provider)
     }
+}
+
+
+#[get("/")]
+async fn health() -> String {
+    let mut response = String::new();
+
+    let now = match SystemTime::now().duration_since(SystemTime::UNIX_EPOCH) {
+        Ok(n) =>  n.as_secs(),
+        Err(_) => 0,
+    };
+    // TODO: struct serialization
+    let msg = format!(" {{\"date\": {} ,\"msg\": \"xmrbc-rs is up.\"}} ", now);
+    response.push_str(&msg);
+    response
 }
 
 #[get("/relay?<tx>")]
@@ -72,8 +91,16 @@ async fn relay(tx: String) -> String {
     response
 }
 
+// #[get("/relay?<tx>&<message>")]
+// async fn relay_wmsg(tx: String, message: String) -> String {
+//     // TODO: send message+tx to server (store in pgdb)
+       // Encrypted messages can be accessed by providing signature
+       // from the respective xmr address private keys
+// }
+
 #[launch]
 fn rocket() -> _ {
     rocket::build()
         .mount("/", routes![relay])
+        .mount("/health", routes![health])
 }

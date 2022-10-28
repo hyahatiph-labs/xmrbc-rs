@@ -22,15 +22,19 @@ struct Options {
         default_value = "https://xmrchain.net/checkandpush",
         help = "enter block explorer url"
     )]
+    address: String,
     network: String,
     transaction: Transaction,
+    txm: String,
 }
 
 impl Options {
     fn into_parts(self) -> (String, Request, Recipient) {
         let req = Request {
+            address: self.address,
             network: self.network,
             transaction: self.transaction,
+            txm: self.txm
         };
         (self.websocket, req, self.service_provider)
     }
