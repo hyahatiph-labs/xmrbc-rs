@@ -1,5 +1,7 @@
 # Nym Monero Broadcaster
 
+[![Rust](https://github.com/hyahatiph-labs/xmrbc-rs/actions/workflows/rust.yml/badge.svg?branch=dev)](https://github.com/hyahatiph-labs/xmrbc-rs/actions/workflows/rust.yml)
+
 This repository implements an anonymous Monero transaction broadcasting tool on top of
 [Nym](https://github.com/nymtech/nym), a mixnet still under heavy development. So while the technology looks promising
 any anonymity claims are to be taken with a grain of salt. This project is provided as-is, it might work as expected or
