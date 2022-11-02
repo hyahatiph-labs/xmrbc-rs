@@ -27,7 +27,7 @@ struct Options {
         default_value = "https://stagenet.xmrchain.net/checkandpush",
         help = "enter block explorer url"
     )]
-    address: String,
+    subaddress: String,
     network: String,
     txm: String,
 }
@@ -35,7 +35,7 @@ struct Options {
 impl Options {
     fn into_parts(self, tx: Transaction) -> (String, Request, Recipient) {
         let req = Request {
-            address: self.address,
+            subaddress: self.subaddress,
             network: self.network,
             transaction: tx,
             txm: self.txm,
@@ -95,7 +95,7 @@ async fn relay(tx: String) -> String {
 // async fn relay_wmsg(tx: String, message: String) -> String {
 //     // TODO: send message+tx to server (store in pgdb)
        // Encrypted messages can be accessed by providing signature
-       // from the respective xmr address private keys
+       // associated with the respective xmr private keys
 // }
 
 #[launch]

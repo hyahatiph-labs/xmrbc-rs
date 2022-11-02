@@ -1,7 +1,8 @@
-use self::models::*;
 use diesel::prelude::*;
+use self::models::*;
 use xmrbc::*;
 
+// manual message retreival
 fn main() {
     use self::schema::messages::dsl::*;
 
@@ -14,7 +15,7 @@ fn main() {
 
     println!("Displaying {} messages", results.len());
     for m in results {
-        println!("{}", m.title);
+        println!("{}", m.subaddress);
         println!("-----------\n");
         println!("{}", m.body);
     }

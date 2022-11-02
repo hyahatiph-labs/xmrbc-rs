@@ -3,6 +3,7 @@ use diesel::prelude::*;
 use std::env::args;
 use xmrbc::*;
 
+// manual message publishing
 fn main() {
     use self::schema::messages::dsl::{messages, published};
 
@@ -17,5 +18,5 @@ fn main() {
         .set(published.eq(true))
         .get_result::<TxMessage>(connection)
         .unwrap();
-    println!("Published message {}", m.title);
+    println!("Published message {}", m.subaddress);
 }

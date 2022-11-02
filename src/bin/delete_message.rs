@@ -2,6 +2,7 @@ use diesel::prelude::*;
 use std::env::args;
 use xmrbc::*;
 
+// manual message deletion
 fn main() {
     use self::schema::messages::dsl::*;
 
@@ -9,7 +10,7 @@ fn main() {
     let pattern = format!("%{}%", target);
 
     let connection = &mut establish_connection();
-    let num_deleted = diesel::delete(messages.filter(title.like(pattern)))
+    let num_deleted = diesel::delete(messages.filter(subaddress.like(pattern)))
         .execute(connection)
         .expect("Error deleting messages");
 

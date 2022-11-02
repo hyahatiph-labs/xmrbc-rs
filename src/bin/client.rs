@@ -22,7 +22,7 @@ struct Options {
         default_value = "https://xmrchain.net/checkandpush",
         help = "enter block explorer url"
     )]
-    address: String,
+    subaddress: String,
     network: String,
     transaction: Transaction,
     txm: String,
@@ -31,7 +31,7 @@ struct Options {
 impl Options {
     fn into_parts(self) -> (String, Request, Recipient) {
         let req = Request {
-            address: self.address,
+            subaddress: self.subaddress,
             network: self.network,
             transaction: self.transaction,
             txm: self.txm

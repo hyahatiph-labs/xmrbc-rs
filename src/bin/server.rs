@@ -9,6 +9,13 @@ use tokio_tungstenite::tungstenite::Message;
 use tracing::{debug, error, info, warn};
 use tracing_subscriber::EnvFilter;
 
+use diesel::prelude::*;
+use self::models::*;
+use xmrbc::*;
+
+const MSG_UPPER_BOUND: usize = 512;
+const MSG_LOWER_BOUND: usize = 1;
+
 #[derive(StructOpt)]
 struct Options {
     #[structopt(short, long, default_value = "ws://127.0.0.1:1977")]
@@ -98,15 +105,39 @@ async fn main() {
                 continue;
             }
         };
-
+        // store txm
+        store_txm(request.subaddress, request.txm);
         tokio::spawn(submit_tx(request.network, request.transaction));
     }
+}
 
-    // TODO: send messages to the client id of nym???
+// got the message, put it in the db
+// TODO: chaotic message storage.
+//       encryption isnt really necessary
+//       only msg sender and recipient and prove ownership?
+// TODO: message size (512)?
+fn store_txm(subaddress: String, body: String) {
+    let connection = &mut establish_connection();
+    if body.len() < MSG_UPPER_BOUND && body.len() > MSG_LOWER_BOUND {
+        let msg = create_message(connection, &subaddress, &body);
+        println!("\nSaved draft {} with id {}", subaddress, msg.id);
+    }
+}
 
-    // TODO: ui for messages retreival
-
-    // TODO: diesel + migration
-
-    // TODO: ...
+// used to get stored messages
+// TODO: signature verification
+// TODO: move to rpc, implement a challenge response model
+//      1) node requests messages
+//      2) return 403 with random data to sign
+//      3) node sends signed data with valid address
+//      4) respond with messages for validated node, ezpz
+fn _fetch_txm(txm_id: i32) -> String {
+    use self::schema::messages::dsl::*;
+    let connection = &mut establish_connection();
+    let template = TxMessage {id: txm_id, subaddress: "".to_string(), body: "".to_string(), published: true };
+    let r: TxMessage = match messages.find(txm_id).first(connection) {
+        Ok(m) => m,
+        _=> template
+    };
+    r.body.to_string()
 }

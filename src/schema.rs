@@ -3,7 +3,7 @@
 diesel::table! {
     messages (id) {
         id -> Int4,
-        title -> Varchar,
+        subaddress -> Varchar,
         body -> Text,
         published -> Bool,
     }

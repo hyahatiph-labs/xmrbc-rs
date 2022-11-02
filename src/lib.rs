@@ -14,7 +14,7 @@ use std::env;
 
 #[derive(Debug, Ord, PartialOrd, Eq, PartialEq, Serialize, Deserialize)]
 pub struct Request {
-    pub address: String,
+    pub subaddress: String,
     pub network: String,
     pub transaction: Transaction,
     pub txm: String,
@@ -46,10 +46,10 @@ pub fn establish_connection() -> PgConnection {
         .unwrap_or_else(|_| panic!("Error connecting to {}", database_url))
 }
 
-pub fn create_message(conn: &mut PgConnection, title: &str, body: &str) -> TxMessage {
+pub fn create_message(conn: &mut PgConnection, subaddress: &str, body: &str) -> TxMessage {
     use crate::schema::messages;
 
-    let new_msg = NewTxMessage { title, body };
+    let new_msg = NewTxMessage { subaddress, body };
 
     diesel::insert_into(messages::table)
         .values(&new_msg)

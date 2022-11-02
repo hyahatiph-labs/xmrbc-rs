@@ -161,6 +161,13 @@ podman run --rm -P -p 127.0.0.1:<SERVER_PORT>:<SERVER_PORT> --name xmrbc-rs \
 xmrbc-rs:v0.1.0 /bin/bash -c "sh /home/dev/deploy.sh <SERVER_PORT>"
 ```
 
+## Diesel / Postgresql
+
+* WIP
+* see the [diesel docs](https://crates.io/crates/diesel_cli)
+* recommend using postgres [docker](https://hub.docker.com/_/postgres)
+
+ 
 ## Shoutouts
 * This was inspired by @sgeisler 's work on [btcbc-rs](https://github.com/sgeisler/btcbc-rs)
 * Thanks to @t-900-a for suggesting
