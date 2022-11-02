@@ -1,5 +1,4 @@
 #[macro_use] extern crate rocket;
-#[cfg(test)] mod tests;
 
 use std::str::FromStr;
 use std::time::{SystemTime};
